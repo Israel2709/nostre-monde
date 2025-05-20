@@ -9,12 +9,17 @@ const phrases = [
   "Donde termina la luz, comienza tu nombre.",
   "Tu recuerdo es la única foto que no se borra.",
   "Entre miles de capturas, sólo tú me enfocas.",
-  // Agrega más frases si gustas
+  "Para volver al centro me hacen falta tus ojos...",
+  "Soy aquel que ni entre sueños te olvida...",
+  "Podría gritar que me dejes beber de tu sangre...",
+  "Me complace amarte, disfruto acariciarte, y ponerte a dormir",
+  "No te fallaré, contigo yo quiero envejecer",
 ];
 
 function WelcomeModal({ onClose, onOpenFullscreen }) {
   const [randomPhoto, setRandomPhoto] = useState(null);
   const [randomPhrase, setRandomPhrase] = useState("");
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const photosRef = ref(database, "photos");
@@ -33,26 +38,50 @@ function WelcomeModal({ onClose, onOpenFullscreen }) {
 
   if (!randomPhoto) return null;
 
+  const handleClose = () => {
+    // Inicia animación de salida
+    setVisible(false);
+    // Espera a que termine la transición para cerrar completamente
+    setTimeout(onClose, 300); // tiempo igual a la duración del transition
+  };
+
   const handleOpen = () => {
     onOpenFullscreen(randomPhoto);
-    onClose();
+    handleClose();
   };
 
   return createPortal(
     <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center">
-      <div className="bg-surface text-white p-6 rounded-xl shadow-xl max-w-md w-full text-center">
+      <div
+        className={`bg-surface text-white p-6 rounded-xl shadow-xl max-w-md w-full text-center transition-all duration-300 ease-out transform ${
+          visible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+        }`}
+      >
+        {/* Imagen */}
         <img
           src={randomPhoto.url}
           alt={randomPhoto.name}
           className="w-full h-64 object-cover rounded mb-4"
         />
+
+        {/* Frase */}
         <p className="italic text-secondary mb-6">{randomPhrase}</p>
-        <button
-          onClick={handleOpen}
-          className="bg-primary text-white py-2 px-4 rounded hover:bg-orange-500 transition"
-        >
-          Ver en galería
-        </button>
+
+        {/* Botones */}
+        <div className="flex justify-center gap-4">
+          <button
+            onClick={handleOpen}
+            className="bg-primary text-white py-2 px-4 rounded hover:bg-orange-500 transition"
+          >
+            Ver en galería
+          </button>
+          <button
+            onClick={handleClose}
+            className="bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-500 transition"
+          >
+            Cerrar
+          </button>
+        </div>
       </div>
     </div>,
     document.body
