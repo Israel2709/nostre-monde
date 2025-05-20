@@ -1,8 +1,11 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
 
 @theme {
   --color-background: #121212; /* Fondo oscuro */
   --color-surface: #1e1e1e;    /* Superficies */
   --color-primary: #ffa726;    /* Naranja */
   --color-secondary: #8f9779;  /* Verde olivo */
+  --font-handwriting: 'Dancing Script', cursive;
 }

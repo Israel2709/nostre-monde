@@ -14,26 +14,27 @@ function PhotoCard({ photo, selected, onClick }) {
     <div
       onClick={onClick}
       className={classNames(
-        "rounded overflow-hidden cursor-pointer transition-transform transform hover:scale-105 shadow-md bg-surface",
+        "cursor-pointer transform transition-transform hover:scale-105",
         {
           "ring-4 ring-secondary": selected,
         }
       )}
     >
-      <img
-        src={photo.url}
-        alt={photo.name}
-        className="w-full h-48 object-cover"
-      />
+      <div className="bg-white rounded-sm shadow-lg p-2 flex flex-col items-center justify-between h-full">
+        {/* Imagen */}
+        <div className="w-full aspect-[3/4] bg-gray-200 overflow-hidden rounded-sm">
+          <img
+            src={photo.url}
+            alt={photo.name}
+            className="w-full h-full object-cover"
+          />
+        </div>
 
-      <div className="bg-black/60 text-white text-xs p-2">
-        <p className="font-semibold text-primary">Fecha de captura</p>
-        <p>{formattedDate}</p>
-
-        {/*<div className="flex items-center gap-1 mt-1 text-secondary">
-          <FaEye />
-          <span>{photo.views ?? 0} vistas</span>
-        </div>*/}
+        {/* Marco inferior estilo Polaroid */}
+        <div className="pt-3 text-center text-xl text-gray-700 w-full font-handwriting">
+          <p className="font-semibold">Fecha de captura</p>
+          <p>{formattedDate}</p>
+        </div>
       </div>
     </div>
   );
