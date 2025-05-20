@@ -71,7 +71,6 @@ function FullscreenViewer({ photos, currentIndex, onClose, onPrev, onNext }) {
           </div>
         </div>
       </div>
-
       <button
         onClick={onNext}
         className={classNames(
