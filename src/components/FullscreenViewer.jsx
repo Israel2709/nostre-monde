@@ -72,10 +72,10 @@ function FullscreenViewer({ photos, currentIndex, onClose, onPrev, onNext }) {
             )}
           </div>
 
-          <div className="flex justify-center items-center gap-1 mt-1 text-secondary text-xs">
+          {/*<div className="flex justify-center items-center gap-1 mt-1 text-secondary text-xs">
             <FaEye />
             <span>{currentPhoto.views ?? 0} vistas</span>
-          </div>
+          </div>*/}
         </div>
       </div>
 

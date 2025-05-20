@@ -30,10 +30,10 @@ function PhotoCard({ photo, selected, onClick }) {
         <p className="font-semibold text-primary">Fecha de captura</p>
         <p>{formattedDate}</p>
 
-        <div className="flex items-center gap-1 mt-1 text-secondary">
+        {/*<div className="flex items-center gap-1 mt-1 text-secondary">
           <FaEye />
           <span>{photo.views ?? 0} vistas</span>
-        </div>
+        </div>*/}
       </div>
     </div>
   );
