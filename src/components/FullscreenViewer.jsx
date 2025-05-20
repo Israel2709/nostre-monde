@@ -27,7 +27,8 @@ function FullscreenViewer({ photos, currentIndex, onClose, onPrev, onNext }) {
   }, [currentPhoto?.id]);
 
   return createPortal(
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-background bg-opacity-95 flex items-center justify-center">
+      {/* Botón cerrar */}
       <button
         onClick={onClose}
         className="absolute top-4 right-4 text-white text-3xl hover:text-red-400"
@@ -35,6 +36,7 @@ function FullscreenViewer({ photos, currentIndex, onClose, onPrev, onNext }) {
         <FaTimes />
       </button>
 
+      {/* Botón anterior */}
       <button
         onClick={onPrev}
         className={classNames(
@@ -48,29 +50,36 @@ function FullscreenViewer({ photos, currentIndex, onClose, onPrev, onNext }) {
         <FaChevronLeft />
       </button>
 
-      <div className="fixed inset-0 z-50 bg-background bg-opacity-95 flex items-center justify-center">
-        <div className="max-w-full max-h-full px-4 text-center">
-          <img
-            src={currentPhoto.url}
-            alt={currentPhoto.name}
-            className="max-h-[80vh] max-w-[90vw] object-contain mx-auto rounded"
-          />
+      {/* Imagen y metadatos */}
+      <div className="max-w-full max-h-full px-4 text-center">
+        <img
+          src={currentPhoto.url}
+          alt={currentPhoto.name}
+          className="max-h-[80vh] max-w-[90vw] object-contain mx-auto rounded"
+        />
 
-          <div className="text-white mt-4 space-y-1 text-sm">
-            <div>
-              <span className="block font-semibold text-primary">
-                Fecha de captura
-              </span>
-              {formattedDate}
-            </div>
+        <div className="text-white mt-4 space-y-1 text-sm">
+          <div>
+            <span className="block font-semibold text-primary">
+              Fecha de captura
+            </span>
+            {format(
+              new Date(currentPhoto.date),
+              "d 'de' MMMM 'de' yyyy, h:mm a",
+              {
+                locale: es,
+              }
+            )}
+          </div>
 
-            <div className="flex justify-center items-center gap-1 mt-1 text-xs text-secondary">
-              <FaEye className="inline" />
-              <span>Vistas: {currentPhoto.views ?? 0}</span>
-            </div>
+          <div className="flex justify-center items-center gap-1 mt-1 text-secondary text-xs">
+            <FaEye />
+            <span>{currentPhoto.views ?? 0} vistas</span>
           </div>
         </div>
       </div>
+
+      {/* Botón siguiente */}
       <button
         onClick={onNext}
         className={classNames(
